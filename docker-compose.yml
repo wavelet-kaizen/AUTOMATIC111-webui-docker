@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  stable-diffusion-webui:
+    container_name: automatic1111-stable-diffusion-webui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env_docker
+    ports:
+      - '7860:7860'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ./outputs:/mnt/outputs
+      - ./model:/mnt/model
